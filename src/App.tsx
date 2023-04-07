@@ -1,29 +1,53 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { useEffect, useState } from 'react';
+import { WEB_CONJUCATOR_PATH, getConjugationsByVerb } from './api';
+import { Form } from './components';
+import { Pronoun, Verb, getRandomPronoun } from './models';
+import { VERBS } from './resources';
 import './App.css';
 
 function App() {
-    const [count, setCount] = useState(0);
+    const [infinitive, setInfinitive] = useState<string>('');
+    const [pronoun, setPronoun] = useState<Pronoun>(Pronoun.MINA);
+    const [verb, setVerb] = useState<Verb | null | undefined>(undefined);
+
+    useEffect(() => {
+        resetTask();
+    }, []);
+
+    useEffect(() => {
+        if (infinitive.length > 0) {
+            fetchConjugations();
+        }
+    }, [pronoun, infinitive]);
+
+    const resetTask = (): void => {
+        const index = Math.floor(Math.random() * VERBS.length);
+        setInfinitive(VERBS[index]);
+
+        const randomPronoun = getRandomPronoun();
+        setPronoun(randomPronoun);
+    };
+
+    const fetchConjugations = async (): Promise<void> => {
+        const v = await getConjugationsByVerb(infinitive);
+        setVerb(v);
+    };
 
     return (
         <div className='App'>
-            <div>
-                <a href='https://vitejs.dev' target='_blank'>
-                    <img src={viteLogo} className='logo' alt='Vite logo' />
-                </a>
-                <a href='https://reactjs.org' target='_blank'>
-                    <img src={reactLogo} className='logo react' alt='React logo' />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className='card'>
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
+            <a
+                className='infinitive'
+                href={`${WEB_CONJUCATOR_PATH}/${infinitive}`}
+                target={'_blank'}
+                tabIndex={-1}
+            >
+                {infinitive}
+            </a>
+            <p className='pronoun'>{pronoun}</p>
+            <Form verb={verb} pronoun={pronoun} />
+            <button className='button' onClick={() => resetTask()}>
+                Another one
+            </button>
         </div>
     );
 }

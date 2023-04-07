@@ -1,0 +1,29 @@
+.group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tense {
+    width: 140px;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 0 15px 4px 0;
+    text-align: left;
+}
+
+.input {
+    font-size: 14px;
+    line-height: 21px;
+    padding: 2px 4px;
+}
+
+.correct {
+    outline: none;
+    box-shadow: 0px 0px 3px 4px rgb(129, 199, 132);
+}
+
+.incorrect {
+    outline: none;
+    box-shadow: 0px 0px 3px 4px rgb(229, 115, 115);
+}
