@@ -23,16 +23,32 @@ export const Form: FunctionComponent<Props> = ({ verb, pronoun }) => {
                 <Answer tense={verb.preesens} pronoun={pronoun} />
             </div>
             <div className={styles.group}>
+                <p className={styles.tense}>preesens neg.</p>
+                <Answer tense={verb.preesensNeg} pronoun={pronoun} />
+            </div>
+            <div className={styles.group}>
                 <p className={styles.tense}>imperfekti</p>
                 <Answer tense={verb.imperfekti} pronoun={pronoun} />
+            </div>
+            <div className={styles.group}>
+                <p className={styles.tense}>imperfekti neg.</p>
+                <Answer tense={verb.imperfektiNeg} pronoun={pronoun} />
             </div>
             <div className={styles.group}>
                 <p className={styles.tense}>perfekti</p>
                 <Answer tense={verb.perfekti} pronoun={pronoun} />
             </div>
             <div className={styles.group}>
+                <p className={styles.tense}>perfekti neg.</p>
+                <Answer tense={verb.perfektiNeg} pronoun={pronoun} />
+            </div>
+            <div className={styles.group}>
                 <p className={styles.tense}>plkvperfekti</p>
                 <Answer tense={verb.pluskvamperfekti} pronoun={pronoun} />
+            </div>
+            <div className={styles.group}>
+                <p className={styles.tense}>plkvperfekti neg.</p>
+                <Answer tense={verb.pluskvamperfektiNeg} pronoun={pronoun} />
             </div>
         </div>
     );
